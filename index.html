@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>pivot-project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div id="app" class="container mt-5">
+      <input v-model='red' @change="update" >
+    
+        <h2 class="border-bottom pb-2 mb-4">Pivot <small>(drag & drop UI + PivotTable)</small></h2>
+        <h3 v-if="query" class="border-bottom pb-2 mb-4">query: {{query}}</h3>
+        <div class="mb-5">
+          <pivot ref="pivotTable"
+                :data="data"
+                :fields="fields"
+                :row-fields="rowFields"
+                :col-fields="colFields"
+                :reducer="reducer"
+                :default-show-settings="defaultShowSettings"
+                >
+            <template slot="value" slot-scope="{ value, col, row }">
+              {{ value.toLocaleString() }} | {{percent(col, row)}} %
+            </template>
+          </pivot>
+          <div class="statistics">Sum: {{sum}}</div>
+        </div>
+    
+    
+      </div>
+    <script src="/dist/build.js"></script>
+  </body>
+</html>
